@@ -1,120 +1,115 @@
 <!DOCTYPE html>
 <html>
 <meta charset="utf-8">
-
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <head>
 	<title>Weather</title>
 	<style>
+		* {
+			box-sizing: border-box;
+		}
+		html {
+			height: 100%;
+		}
+		body {
+			margin: 0;
+			padding: 0;
+			height: 100vh;
+			width: auto;
+			overflow-x: hidden;
+			background: whitesmoke;
+		}
+		.title {
+			float: right;
+			font-size: 2rem;
+		}
 		.weatherForm {
-			text-align: center
+			position: relative;
+			box-shadow: 0 5px 10px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
+			padding: 1.5rem;
+			background: #5c6bc0;
+			margin: 0rem 0rem 1.8rem 0rem;
 		}
 		.module {
 			padding: 1rem;
-			margin: .5rem;
+			margin: 1.1rem;
 			box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
 		}
-
+		.sb {
+			transform: translateX(-100%);
+			width: 40%;
+			height: 100%;
+			position: absolute;
+			display: inline;
+			background: #448aff;
+			z-index: 100;
+			padding: 2.2rem;
+			transition: transform .5s ease-in-out;
+		}
+		.sb-active {
+			transform: none;
+			box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
+			transition: transform .5s ease-in-out;
+		}
+		.cnt {
+			position: relative;
+			transition: transform .5s ease-in-out;
+		}
+		.cnt-active {
+			transform: translateX(40%);
+			transition: transform .5s ease-in-out;
+		}
+		input[type="text"] {
+			padding: .35rem;
+			display: block;
+			margin-bottom: .8rem;
+		}
+		input[name="stateSearch"] {
+			width: 30px;
+		}
+		[type="submit"], button {
+			background: #3f51b5;
+			border: none;
+			box-shadow: 0 2px 5px rgba(0,0,0,0.19), 0 1px 1px rgba(0,0,0,0.23);
+			cursor: pointer;
+			padding: .35rem;
+			border-radius: .2rem;
+		}
 	</style>
 </head>
 <body>
-<div class="weatherForm">
+<div class="sb">
+	<h3>
+		Add a new Location
+	</h3>
 	<form id="form">
-		<label for="citySearch">City (i.e. Austin)</label>
-		<input id="citySearch" type="text" name="citySearch">
-		<label for="stateSearch">State (i.e. tx)</label>
-		<input id="stateSearch" type="text" name="stateSearch">
-		<input type="submit" name="submit" value="New Location">
-	</form>
+			<label for="citySearch">City </label>
+			<input id="citySearch" type="text" name="citySearch" placeholder="Austin">
+			<label for="stateSearch">State </label>
+			<input id="stateSearch" type="text" name="stateSearch" placeholder="tx">
+			<input type="submit" name="submit" value="New Location">
+		</form>
 </div>
-<hr>
-<div id="here">
-	<div class="module" data-count="0" hidden>
-			<h4>Weather for: Loading...</h4>
-			<ul>
-				<li id="date">Loading...</li>
-				<li id="weather">Loading...</li>
-				<li id="temp">Loading...</li>
-			</ul>
+<div class="cnt">
+	<div class="weatherForm">
+		<button id="show_sb">Add a Location</button>
+		<span class="title">
+			Weather plus
+		</span>
+	</div>
+	<div id="weather_mods">
+		<div class="module" data-count="0" hidden>
+				<h4>Weather for: Loading...</h4>
+				<ul>
+					<li id="date">Loading...</li>
+					<li id="weather">Loading...</li>
+					<li id="temp">Loading...</li>
+				</ul>
+		</div>
 	</div>
 </div>
-<script type="text/javascript">
-// const $form = document.getElementById('form'),
-// 			$date = do cument.getElementById('date'),
-// 			$weather = document.getElementById('weather'),
-// 			$temp = document.getElementById('temp'),
-// 			$there = document.getElementById('there'),
-// 			$here = document.getElementById('here');
 
-// const updateWeather = function weatherFunc( weatherObj, module_number, cityQ ) {
-// 		let curr_module = document.querySelector(`[data-count="${module_number}"]`);
-// 		let title = curr_module.children[0];
-// 		let module_arr = curr_module.children[1].children;
-
-// 		title.textContent = `Weather for: ${cityQ}`;
-// 		module_arr.date.textContent = weatherObj.date;
-// 		module_arr.weather.textContent = weatherObj.text;
-// 		module_arr.temp.textContent = weatherObj.temp;
-// };
-// const getForecast = function thar(city, state) {
-//     var statement = `select * from weather.forecast where woeid in (select woeid from geo.places(1) where text="${ city }, ${ state }")`
-//     let url = 'https://query.yahooapis.com/v1/public/yql?format=json&q=' + statement;
-//     // TODO add cache logic here
-//     // Fetch the latest data.
-//     var request = new XMLHttpRequest();
-//     request.onreadystatechange = function() {
-//       if (request.readyState === XMLHttpRequest.DONE) {
-//         if (request.status === 200) {
-//           var response = JSON.parse(request.response);
-//           var results = response.query.results.channel;
-//           var title = results.item.title;
-// 					console.log(results.item.condition);
-//           return updateWeather(results.item.condition, 1, city);
-//         }
-//       } else if (request.readyState === XMLHttpRequest.LOADING) {
-//       		console.log('loading');
-//       }
-//     };
-//     request.open('GET', url);
-//     request.send();
-//   };
-// $form.addEventListener('submit', function(e){
-// 		let city = document.getElementById('citySearch').value;
-// 		let state = document.getElementById('stateSearch').value;
-// 		e.preventDefault();
-// 		document.getElementById('citySearch').value = '';
-// 		document.getElementById('stateSearch').value = '';
-// 		getForecast(city, state);
-// 	});
-
-// 	//use with progress event
-// 	function updateProgress (oEvent) {
-// 	  if (oEvent.lengthComputable) {
-// 	    var percentComplete = oEvent.loaded / oEvent.total;
-// 	    console.log(percentComplete);
-// 	  } else {
-// 	    console.log('?');
-// 	  }
-// 	};
-// 	function getCityList() {
-// 		let req = new XMLHttpRequest();
-// 		req.addEventListener("load", function(){
-// 			console.log('load event');
-// 			if(req.status === 200){
-// 				const resObj = JSON.parse(req.responseText);
-// 				const locationsArr = resObj.locations;
-// 				console.log(locationsArr.length);
-// 				// document.getElementById('here').textContent = 
-// 			} else {
-// 				console.log('something else');
-// 			}
-// 		});
-// 		req.open("GET", "data/LocationHistory.json");
-// 		req.setRequestHeader('Content-type','application/json')
-// 		req.send();
-// 	};
-// // }());
-
-</script>
 <script src="app.js"></script>
 </body>
 </html>

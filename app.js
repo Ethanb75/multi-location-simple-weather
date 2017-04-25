@@ -15,36 +15,26 @@
 //     }
 // }
 
-/*
-*cities array example: 
-*=========================
-* cities: [
-*   {
-*       city:,
-*       state:,
-*       count:,
-*   }
-* ]
-*/
+
 app = {
-    cities: {},
-    newCityBtn: document.getElementById('new_city')
+    cities: {}
 };
-const $here = document.getElementById('here'),
+const $weather_mods = document.getElementById('weather_mods'),
+	  $show_sb = document.getElementById('show_sb'),
+	  $cnt = document.getElementsByClassName('cnt')[0],
 	  $form = document.getElementById('form');
 const getForecast = function thar(city, state, mod_num) {
-    var statement = `select * from weather.forecast where woeid in (select woeid from geo.places(1) where text="${ city }, ${ state }")`
+    let statement = `select * from weather.forecast where woeid in (select woeid from geo.places(1) where text="${ city }, ${ state }")`
     let url = 'https://query.yahooapis.com/v1/public/yql?format=json&q=' + statement;
     // TODO add cache logic here
     // Fetch the latest data.
-    var request = new XMLHttpRequest();
+    let request = new XMLHttpRequest();
     request.onreadystatechange = function() {
       if (request.readyState === XMLHttpRequest.DONE) {
         if (request.status === 200) {
-          var response = JSON.parse(request.response);
-          var results = response.query.results.channel;
-          var title = results.item.title;
-					console.log(results.item.condition);
+          let response = JSON.parse(request.response);
+          let results = response.query.results.channel;
+          let title = results.item.title;
           return updateWeather(results.item.condition, mod_num, city);
         }
       } else if (request.readyState === XMLHttpRequest.LOADING) {
@@ -75,24 +65,43 @@ window.onload = function() {
     getCitiesFromStorage();
     console.log(app.cities);
 	Object.entries(app.cities).forEach((el) => {
-		let newModule = $here.children[0].cloneNode(true);
+		let newModule = $weather_mods.children[0].cloneNode(true);
 		newModule.dataset.count = el[1].count;
 		newModule.hidden = false;
-		$here.appendChild(newModule)
+		$weather_mods.appendChild(newModule)
 	});
 	Object.entries(app.cities).forEach((el) => {
 		getForecast(el[0], el[1].state, el[1].count);
 	})
 };
+// $cnt.addEventListener('click', function() {
+// 	let sb = document.getElementsByClassName('sb')[0];
+// 	let cnt = this;
+// 	if(cnt.classList.length > 1) {
+// 		sb.setAttribute('class','sb');
+// 		cnt.setAttribute('class','cnt');
+// 	}
+// });
+$show_sb.addEventListener('click', function() {
+	let cnt = document.getElementsByClassName('cnt')[0];
+	let sb = document.getElementsByClassName('sb')[0];
+	if(sb.classList.length > 1) {
+		sb.setAttribute('class','sb');
+		cnt.setAttribute('class','cnt');
+	} else {
+		sb.setAttribute('class','sb sb-active');
+		cnt.setAttribute('class','cnt cnt-active');
+	}
+});
 $form.addEventListener('submit', function(e){
+	e.preventDefault();
 	let city = document.getElementById('citySearch').value;
 	let state = document.getElementById('stateSearch').value;
 	let new_module_number = Object.entries(app.cities).length + 1;
-	let newModule = $here.children[0].cloneNode(true);
+	let newModule = $weather_mods.children[0].cloneNode(true);
 	newModule.dataset.count = new_module_number;
 	newModule.hidden = false;
-	$here.appendChild(newModule);
-	e.preventDefault();
+	$weather_mods.appendChild(newModule);
 	document.getElementById('citySearch').value = '';
 	document.getElementById('stateSearch').value = '';
 	//update app.cities
