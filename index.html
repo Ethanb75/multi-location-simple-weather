@@ -1,10 +1,11 @@
 <!DOCTYPE html>
 <html>
 <meta charset="utf-8">
+
 <head>
 	<title>Weather</title>
 	<style>
-		.weather {
+		.weatherForm {
 			text-align: center
 		}
 		.module {
@@ -12,26 +13,27 @@
 			margin: .5rem;
 			box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
 		}
+
 	</style>
 </head>
 <body>
-<div class="login">
-	
-</div>
-<div class="weather">
+<div class="weatherForm">
 	<form id="form">
+		<label for="citySearch">City (i.e. Austin)</label>
 		<input id="citySearch" type="text" name="citySearch">
+		<label for="stateSearch">State (i.e. tx)</label>
 		<input id="stateSearch" type="text" name="stateSearch">
-		<input type="submit" name="submit" value="Enter Form">
+		<input type="submit" name="submit" value="New Location">
 	</form>
 </div>
+<hr>
 <div id="here">
 	<div class="module" data-count="0" hidden>
-			<h4>Weather for: fake</h4>
+			<h4>Weather for: Loading...</h4>
 			<ul>
-				<li id="date">fake</li>
-				<li id="weather">data</li>
-				<li id="temp">fake</li>
+				<li id="date">Loading...</li>
+				<li id="weather">Loading...</li>
+				<li id="temp">Loading...</li>
 			</ul>
 	</div>
 </div>
