@@ -66,10 +66,10 @@ const getForecast = function thar(city, state, mod_num) {
 };
 
 const getCitiesFromStorage = function() {
-    return app.cities = JSON.parse(localStorage.getItem('cities'));
+    return app.cities = JSON.parse(localStorage.getItem('cities')) || {};
 };
 const updateCityStorage = function( obj ){
-    return localStorage.setItem(JSON.stringify(obj));
+    return localStorage.setItem('cities', JSON.stringify(obj));
 };
 window.onload = function() {
     getCitiesFromStorage();
@@ -99,8 +99,8 @@ $form.addEventListener('submit', function(e){
 	app.cities[city] = {
 		state: state,
 		count: new_module_number
-	}
-
+	};
+	updateCityStorage(app.cities);
 	getForecast(city, state, new_module_number);
 });
 
