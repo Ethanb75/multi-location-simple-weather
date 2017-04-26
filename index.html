@@ -1,92 +1,14 @@
 <!DOCTYPE html>
 <html>
-<meta charset="utf-8">
-<meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta name="viewport" content="width=device-width, initial-scale=1">
 <head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<title>Weather</title>
-	<style>
-		* {
-			box-sizing: border-box;
-		}
-		html {
-			height: 100%;
-		}
-		body {
-			margin: 0;
-			padding: 0;
-			height: 100vh;
-			width: auto;
-			overflow-x: hidden;
-			background: whitesmoke;
-		}
-		.title {
-			float: right;
-			font-size: 2rem;
-		}
-		.weatherForm {
-			position: relative;
-			box-shadow: 0 5px 10px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
-			padding: 1.5rem;
-			background: #5c6bc0;
-			margin: 0rem 0rem 1.8rem 0rem;
-		}
-		.module {
-			padding: 1rem;
-			margin: 1.1rem;
-			box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
-		}
-		.close_btn {
-			float: right;
-			cursor: pointer;
-		}
-		.sb {
-			transform: translateX(-100%);
-			width: 40%;
-			height: 100%;
-			position: fixed;
-			display: inline;
-			background: #448aff;
-			z-index: 100;
-			padding: 2.2rem;
-			transition: transform .5s ease-in-out;
-		}
-		.sb-active {
-			transform: none;
-			box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
-			transition: transform .5s ease-in-out;
-		}
-		.cnt {
-			position: relative;
-			transition: transform .5s ease-in-out;
-		}
-		.cnt-active {
-			transform: translateX(20%);
-			transition: transform .5s ease-in-out;
-		}
-		input[type="text"] {
-			padding: .35rem;
-			display: block;
-			margin-bottom: .8rem;
-		}
-		input[name="stateSearch"] {
-			width: 30px;
-		}
-		[type="submit"], button {
-			background: #3f51b5;
-			border: none;
-			box-shadow: 0 2px 5px rgba(0,0,0,0.19), 0 1px 1px rgba(0,0,0,0.23);
-			cursor: pointer;
-			padding: .35rem;
-			border-radius: .2rem;
-		}
-		@media only screen and (max-device-width: 480px) {
-			.sb {
-				width: 75%;
-			}
-		}
-	</style>
+	
 	<link rel="stylesheet" href="font-awesome/css/font-awesome.min.css">
+	<link href="https://fonts.googleapis.com/css?family=Quicksand|Source+Sans+Pro" rel="stylesheet">
+	<link rel="stylesheet" href="style/app.css">
 </head>
 <body>
 <div class="sb">
@@ -98,9 +20,9 @@
 	</h3>
 	<form id="form">
 			<label for="citySearch">City </label>
-			<input id="citySearch" type="text" name="citySearch" placeholder="Austin">
+			<input id="citySearch" type="text" name="citySearch" placeholder="Austin" autocomplete="on">
 			<label for="stateSearch">State </label>
-			<input id="stateSearch" type="text" name="stateSearch" placeholder="tx">
+			<input id="stateSearch" type="text" name="stateSearch" placeholder="tx" autocomplete="on" maxlength="2">
 			<input type="submit" name="submit" value="New Location">
 		</form>
 </div>

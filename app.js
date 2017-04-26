@@ -15,14 +15,15 @@
 //     }
 // }
 
-
+let cnt = document.getElementsByClassName('cnt')[0];
+	let sb = document.getElementsByClassName('sb')[0];
 app = {
-    cities: {}
+	cnt: document.getElementsByClassName('cnt')[0],
+	sb: document.getElementsByClassName('sb')[0]
 };
 const $weather_mods = document.getElementById('weather_mods'),
 	  $show_sb = document.getElementById('show_sb'),
 	  $close_sb = document.getElementById('close_sb'),
-	  $cnt = document.getElementsByClassName('cnt')[0],
 	  $form = document.getElementById('form');
 const getForecast = function thar(city, state, mod_num) {
     let statement = `select * from weather.forecast where woeid in (select woeid from geo.places(1) where text="${ city }, ${ state }")`
@@ -55,7 +56,10 @@ const getForecast = function thar(city, state, mod_num) {
 		module_arr.weather.textContent = weatherObj.text;
 		module_arr.temp.textContent = weatherObj.temp;
 };
-
+//middleware soon!
+const removeCitiesFromStorage = function() {
+	return localStorage.removeItem('cities');
+};
 const getCitiesFromStorage = function() {
     return app.cities = JSON.parse(localStorage.getItem('cities')) || {};
 };
@@ -75,58 +79,43 @@ window.onload = function() {
 		getForecast(el[0], el[1].state, el[1].count);
 	})
 };
-// $cnt.addEventListener('click', function() {
-// 	let sb = document.getElementsByClassName('sb')[0];
-// 	let cnt = this;
-// 	if(cnt.classList.length > 1) {
-// 		sb.setAttribute('class','sb');
-// 		cnt.setAttribute('class','cnt');
-// 	}
-// });
+
 $close_sb.addEventListener('click', function() {
-	let cnt = document.getElementsByClassName('cnt')[0];
-	let sb = document.getElementsByClassName('sb')[0];
 	if(sb.classList.length > 1) {
-		sb.setAttribute('class','sb');
-		cnt.setAttribute('class','cnt');
+		app.sb.setAttribute('class','sb');
+		app.cnt.setAttribute('class','cnt');
 	} else {
-		sb.setAttribute('class','sb sb-active');
-		cnt.setAttribute('class','cnt cnt-active');
+		app.sb.setAttribute('class','sb sb-active');
+		app.cnt.setAttribute('class','cnt cnt-active');
 	}
 });
 $close_sb.addEventListener('touchstart', function() {
-	let cnt = document.getElementsByClassName('cnt')[0];
-	let sb = document.getElementsByClassName('sb')[0];
 	if(sb.classList.length > 1) {
-		sb.setAttribute('class','sb');
-		cnt.setAttribute('class','cnt');
+		app.sb.setAttribute('class','sb');
+		app.cnt.setAttribute('class','cnt');
 	} else {
-		sb.setAttribute('class','sb sb-active');
-		cnt.setAttribute('class','cnt cnt-active');
+		app.sb.setAttribute('class','sb sb-active');
+		app.cnt.setAttribute('class','cnt cnt-active');
 	}
 });
 $show_sb.addEventListener('click', function() {
-	let cnt = document.getElementsByClassName('cnt')[0];
-	let sb = document.getElementsByClassName('sb')[0];
 	if(sb.classList.length > 1) {
-		sb.setAttribute('class','sb');
-		cnt.setAttribute('class','cnt');
+		app.sb.setAttribute('class','sb');
+		app.cnt.setAttribute('class','cnt');
 	} else {
-		sb.setAttribute('class','sb sb-active');
-		cnt.setAttribute('class','cnt cnt-active');
+		app.sb.setAttribute('class','sb sb-active');
+		app.cnt.setAttribute('class','cnt cnt-active');
 	}
 });
-$show_sb.addEventListener('touchstart', function() {
-	let cnt = document.getElementsByClassName('cnt')[0];
-	let sb = document.getElementsByClassName('sb')[0];
-	if(sb.classList.length > 1) {
-		sb.setAttribute('class','sb');
-		cnt.setAttribute('class','cnt');
-	} else {
-		sb.setAttribute('class','sb sb-active');
-		cnt.setAttribute('class','cnt cnt-active');
-	}
-});
+// $show_sb.addEventListener('touchstart', function() {
+// 	if(sb.classList.length > 1) {
+// 		app.sb.setAttribute('class','sb');
+// 		cnt.setAttribute('class','cnt');
+// 	} else {
+// 		app.sb.setAttribute('class','sb sb-active');
+// 		cnt.setAttribute('class','cnt cnt-active');
+// 	}
+// });
 $form.addEventListener('submit', function(e){
 	e.preventDefault();
 	let city = document.getElementById('citySearch').value;
@@ -145,6 +134,8 @@ $form.addEventListener('submit', function(e){
 	};
 	updateCityStorage(app.cities);
 	getForecast(city, state, new_module_number);
+	app.sb.setAttribute('class','sb');
+	app.cnt.setAttribute('class','cnt');
 });
 
 //el[0] = city
