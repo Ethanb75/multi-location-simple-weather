@@ -36,11 +36,15 @@
 			margin: 1.1rem;
 			box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
 		}
+		.close_btn {
+			float: right;
+			cursor: pointer;
+		}
 		.sb {
 			transform: translateX(-100%);
 			width: 40%;
 			height: 100%;
-			position: absolute;
+			position: fixed;
 			display: inline;
 			background: #448aff;
 			z-index: 100;
@@ -57,7 +61,7 @@
 			transition: transform .5s ease-in-out;
 		}
 		.cnt-active {
-			transform: translateX(40%);
+			transform: translateX(20%);
 			transition: transform .5s ease-in-out;
 		}
 		input[type="text"] {
@@ -76,10 +80,19 @@
 			padding: .35rem;
 			border-radius: .2rem;
 		}
+		@media only screen and (max-device-width: 480px) {
+			.sb {
+				width: 75%;
+			}
+		}
 	</style>
+	<link rel="stylesheet" href="style/font-awesome/css/font-awesome.min.css">
 </head>
 <body>
 <div class="sb">
+	<span id="close_sb" class="close_btn">
+		<i class="fa fa-3x fa-times" aria-hidden="true"></i>
+	</span>
 	<h3>
 		Add a new Location
 	</h3>

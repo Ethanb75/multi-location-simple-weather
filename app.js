@@ -21,6 +21,7 @@ app = {
 };
 const $weather_mods = document.getElementById('weather_mods'),
 	  $show_sb = document.getElementById('show_sb'),
+	  $close_sb = document.getElementById('close_sb'),
 	  $cnt = document.getElementsByClassName('cnt')[0],
 	  $form = document.getElementById('form');
 const getForecast = function thar(city, state, mod_num) {
@@ -82,7 +83,40 @@ window.onload = function() {
 // 		cnt.setAttribute('class','cnt');
 // 	}
 // });
+$close_sb.addEventListener('click', function() {
+	let cnt = document.getElementsByClassName('cnt')[0];
+	let sb = document.getElementsByClassName('sb')[0];
+	if(sb.classList.length > 1) {
+		sb.setAttribute('class','sb');
+		cnt.setAttribute('class','cnt');
+	} else {
+		sb.setAttribute('class','sb sb-active');
+		cnt.setAttribute('class','cnt cnt-active');
+	}
+});
+$close_sb.addEventListener('touchstart', function() {
+	let cnt = document.getElementsByClassName('cnt')[0];
+	let sb = document.getElementsByClassName('sb')[0];
+	if(sb.classList.length > 1) {
+		sb.setAttribute('class','sb');
+		cnt.setAttribute('class','cnt');
+	} else {
+		sb.setAttribute('class','sb sb-active');
+		cnt.setAttribute('class','cnt cnt-active');
+	}
+});
 $show_sb.addEventListener('click', function() {
+	let cnt = document.getElementsByClassName('cnt')[0];
+	let sb = document.getElementsByClassName('sb')[0];
+	if(sb.classList.length > 1) {
+		sb.setAttribute('class','sb');
+		cnt.setAttribute('class','cnt');
+	} else {
+		sb.setAttribute('class','sb sb-active');
+		cnt.setAttribute('class','cnt cnt-active');
+	}
+});
+$show_sb.addEventListener('touchstart', function() {
 	let cnt = document.getElementsByClassName('cnt')[0];
 	let sb = document.getElementsByClassName('sb')[0];
 	if(sb.classList.length > 1) {
