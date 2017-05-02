@@ -79,7 +79,7 @@ const getForecast = function thar(city, state, $target_module) {
       document.getElementById('weather_mods').innerHTML = '';
   };
 
-  $show_sb.addEventListener('touchstart', function() {
+  $show_sb.addEventListener('click', function() {
     if(app.sb.classList.length > 1) {
       app.sb.setAttribute('class','sb');
       app.cnt.setAttribute('class','cnt');
@@ -88,7 +88,7 @@ const getForecast = function thar(city, state, $target_module) {
       app.cnt.setAttribute('class','cnt cnt-active');
     }
   });
-  $show_sb.addEventListener('click', function() {
+  $show_sb.addEventListener('touchstart', function() {
     if(app.sb.classList.length > 1) {
       app.sb.setAttribute('class','sb');
       app.cnt.setAttribute('class','cnt');
