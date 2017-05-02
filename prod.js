@@ -125,11 +125,11 @@ const getForecast = function thar(city, state, $target_module) {
   //     app.cnt.setAttribute('class','cnt cnt-active');
   //   }
   // });
-  $(document).on('mousedown touchstart', '#show_sb', function(event) {
-      if(event.handled === false) return
-        event.stopPropagation();
-        event.preventDefault();
-        event.handled = true;
+  $(document).on('pointerdown', '#show_sb', function(event) {
+      // if(event.handled === false) return
+      //   event.stopPropagation();
+      //   event.preventDefault();
+      //   event.handled = true;
       
       
       if(app.sb.classList.length > 1) {
@@ -140,11 +140,11 @@ const getForecast = function thar(city, state, $target_module) {
         app.cnt.setAttribute('class','cnt cnt-active');
       }
   });
-  $(document).on('mousedown touchstart', '#close_sb', function(event) {
-      if(event.handled === false) return
-        event.stopPropagation();
-        event.preventDefault();
-        event.handled = true;
+  $(document).on('pointerdown', '#close_sb', function(event) {
+      // if(event.handled === false) return
+      //   event.stopPropagation();
+      //   event.preventDefault();
+      //   event.handled = true;
 
       if(app.sb.classList.length > 1) {
         app.sb.setAttribute('class','sb');
