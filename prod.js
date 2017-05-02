@@ -115,6 +115,15 @@ const getForecast = function thar(city, state, $target_module) {
       app.cnt.setAttribute('class','cnt cnt-active');
     }
   }, false);
+  $show_sb.addEventListener('touchstart', function() {
+    if(sb.classList.length > 1) {
+      app.sb.setAttribute('class','sb');
+      cnt.setAttribute('class','cnt');
+    } else {
+      app.sb.setAttribute('class','sb sb-active');
+      cnt.setAttribute('class','cnt cnt-active');
+    }
+  });
   $del_store.addEventListener('click', removeModules);
 
   $form.addEventListener('submit', function(e){
