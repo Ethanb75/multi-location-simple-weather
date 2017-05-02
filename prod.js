@@ -79,15 +79,6 @@ const getForecast = function thar(city, state, $target_module) {
       document.getElementById('weather_mods').innerHTML = '';
   };
 
-  $show_sb.addEventListener('click', function() {
-    if(app.sb.classList.length > 1) {
-      app.sb.setAttribute('class','sb');
-      app.cnt.setAttribute('class','cnt');
-    } else {
-      app.sb.setAttribute('class','sb sb-active');
-      app.cnt.setAttribute('class','cnt cnt-active');
-    }
-  });
   $show_sb.addEventListener('touchend', function() {
     if(app.sb.classList.length > 1) {
       app.sb.setAttribute('class','sb');
@@ -97,6 +88,16 @@ const getForecast = function thar(city, state, $target_module) {
       app.cnt.setAttribute('class','cnt cnt-active');
     }
   });
+  $show_sb.addEventListener('click', function() {
+    if(app.sb.classList.length > 1) {
+      app.sb.setAttribute('class','sb');
+      app.cnt.setAttribute('class','cnt');
+    } else {
+      app.sb.setAttribute('class','sb sb-active');
+      app.cnt.setAttribute('class','cnt cnt-active');
+    }
+  });
+  
   $close_sb.addEventListener('click', function() {
     if(app.sb.classList.length > 1) {
       app.sb.setAttribute('class','sb');
