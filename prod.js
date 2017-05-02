@@ -125,7 +125,7 @@ const getForecast = function thar(city, state, $target_module) {
   //     app.cnt.setAttribute('class','cnt cnt-active');
   //   }
   // });
-  $(document).on('click touchstart', '#show_sb', function(event) {
+  $(document).on('mousedown touchstart', '#show_sb', function(event) {
       if(event.handled === false) return
         event.stopPropagation();
         event.preventDefault();
@@ -140,7 +140,7 @@ const getForecast = function thar(city, state, $target_module) {
         app.cnt.setAttribute('class','cnt cnt-active');
       }
   });
-  $(document).on('click touchstart', '#close_sb', function(event) {
+  $(document).on('mousedown touchstart', '#close_sb', function(event) {
       if(event.handled === false) return
         event.stopPropagation();
         event.preventDefault();
