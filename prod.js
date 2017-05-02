@@ -125,7 +125,7 @@ const getForecast = function thar(city, state, $target_module) {
   //     app.cnt.setAttribute('class','cnt cnt-active');
   //   }
   // });
-  $('#show_sb').on('click touchstart', function(event) {
+  $(document).on('click touchstart', '#show_sb', function(event) {
       if(event.handled === false) return
         event.stopPropagation();
         event.preventDefault();
@@ -140,7 +140,7 @@ const getForecast = function thar(city, state, $target_module) {
         app.cnt.setAttribute('class','cnt cnt-active');
       }
   });
-  $('#close_sb').on('click touchstart', function(event) {
+  $(document).on('click touchstart', '#close_sb', function(event) {
       if(event.handled === false) return
         event.stopPropagation();
         event.preventDefault();
@@ -155,14 +155,14 @@ const getForecast = function thar(city, state, $target_module) {
       }
   });
   // $del_store.addEventListener('click', removeModules);
-  $('#del_store').on('click touchstart', removeModules);
+  $(document).on('click touchstart', '#del_store', removeModules);
 
-  $('#form').on('submit touchstart', function(event){
+  $(document).on('submit touchstart', '#form', function(event){
     if(event.handled === false) return
         event.stopPropagation();
         event.preventDefault();
         event.handled = true;
-        
+
     let city = document.getElementById('citySearch').value;
     let state = document.getElementById('stateSearch').value;
 
