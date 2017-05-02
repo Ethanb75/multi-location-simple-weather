@@ -116,7 +116,7 @@ const getForecast = function thar(city, state, $target_module) {
     }
   }, false);
   $show_sb.addEventListener('touchstart', function() {
-    if(sb.classList.length > 1) {
+    if(app.sb.classList.length > 1) {
       app.sb.setAttribute('class','sb');
       cnt.setAttribute('class','cnt');
     } else {
