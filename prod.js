@@ -78,91 +78,42 @@ const getForecast = function thar(city, state, $target_module) {
       localStorage.removeItem('cities');
       document.getElementById('weather_mods').innerHTML = '';
   };
-  // $show_sb.addEventListener('touchstart', function() {
-  //   if(app.sb.classList.length > 1) {
-  //     app.sb.setAttribute('class','sb');
-  //     app.cnt.setAttribute('class','cnt');
-  //   } else {
-  //     app.sb.setAttribute('class','sb sb-active');
-  //     app.cnt.setAttribute('class','cnt cnt-active');
-  //   }
-  // }, true);
 
-  // $close_sb.addEventListener('click', function() {
-  //   if(app.sb.classList.length > 1) {
-  //     app.sb.setAttribute('class','sb');
-  //     app.cnt.setAttribute('class','cnt');
-  //   } else {
-  //     app.sb.setAttribute('class','sb sb-active');
-  //     app.cnt.setAttribute('class','cnt cnt-active');
-  //   }
-  // });
-  // $close_sb.addEventListener('touchstart', function() {
-  //   if(app.sb.classList.length > 1) {
-  //     app.sb.setAttribute('class','sb');
-  //     app.cnt.setAttribute('class','cnt');
-  //   } else {
-  //     app.sb.setAttribute('class','sb sb-active');
-  //     app.cnt.setAttribute('class','cnt cnt-active');
-  //   }
-  // });
-  // $show_sb.addEventListener('click', function() {
-  //   console.log('click event');
-  //   if(app.sb.classList.length > 1) {
-  //     app.sb.setAttribute('class','sb');
-  //     app.cnt.setAttribute('class','cnt');
-  //   } else {
-  //     app.sb.setAttribute('class','sb sb-active');
-  //     app.cnt.setAttribute('class','cnt cnt-active');
-  //   }
-  // }, false);
-  // $show_sb.addEventListener('touchstart', function() {
-  //   if(app.sb.classList.length > 1) {
-  //     app.sb.setAttribute('class','sb');
-  //     app.cnt.setAttribute('class','cnt');
-  //   } else {
-  //     app.sb.setAttribute('class','sb sb-active');
-  //     app.cnt.setAttribute('class','cnt cnt-active');
-  //   }
-  // });
-  $(document).on('pointerdown', '#show_sb', function(event) {
-      // if(event.handled === false) return
-      //   event.stopPropagation();
-      //   event.preventDefault();
-      //   event.handled = true;
-      
-      
-      if(app.sb.classList.length > 1) {
-        app.sb.setAttribute('class','sb');
-        app.cnt.setAttribute('class','cnt');
-      } else {
-        app.sb.setAttribute('class','sb sb-active');
-        app.cnt.setAttribute('class','cnt cnt-active');
-      }
+  $close_sb.addEventListener('click', function() {
+    if(app.sb.classList.length > 1) {
+      app.sb.setAttribute('class','sb');
+      app.cnt.setAttribute('class','cnt');
+    } else {
+      app.sb.setAttribute('class','sb sb-active');
+      app.cnt.setAttribute('class','cnt cnt-active');
+    }
   });
-  $(document).on('pointerdown', '#close_sb', function(event) {
-      // if(event.handled === false) return
-      //   event.stopPropagation();
-      //   event.preventDefault();
-      //   event.handled = true;
-
-      if(app.sb.classList.length > 1) {
-        app.sb.setAttribute('class','sb');
-        app.cnt.setAttribute('class','cnt');
-      } else {
-        app.sb.setAttribute('class','sb sb-active');
-        app.cnt.setAttribute('class','cnt cnt-active');
-      }
+ 
+  $show_sb.addEventListener('click', function() {
+    console.log('click event');
+    if(app.sb.classList.length > 1) {
+      app.sb.setAttribute('class','sb');
+      app.cnt.setAttribute('class','cnt');
+    } else {
+      app.sb.setAttribute('class','sb sb-active');
+      app.cnt.setAttribute('class','cnt cnt-active');
+    }
   });
-  // $del_store.addEventListener('click', removeModules);
-  $(document).on('click touchstart', '#del_store', removeModules);
 
-  $(document).on('submit touchstart', '#form', function(event){
-    if(event.handled === false) return
-        event.stopPropagation();
-        event.preventDefault();
-        event.handled = true;
+  $show_sb.addEventListener('touchstart', function() {
+    if(app.sb.classList.length > 1) {
+      app.sb.setAttribute('class','sb');
+      app.cnt.setAttribute('class','cnt');
+    } else {
+      app.sb.setAttribute('class','sb sb-active');
+      app.cnt.setAttribute('class','cnt cnt-active');
+    }
+  });
+  
+  $del_store.addEventListener('click', removeModules);
 
+  $form.addEventListener('submit', function(e){
+    e.preventDefault();
     let city = document.getElementById('citySearch').value;
     let state = document.getElementById('stateSearch').value;
 
@@ -183,28 +134,6 @@ const getForecast = function thar(city, state, $target_module) {
     app.sb.setAttribute('class','sb');
     app.cnt.setAttribute('class','cnt');
   });
-  // $form.addEventListener('submit', function(e){
-  //   e.preventDefault();
-  //   let city = document.getElementById('citySearch').value;
-  //   let state = document.getElementById('stateSearch').value;
-
-  //   //set the input values equal to nothing
-  //   document.getElementById('citySearch').value = '';
-  //   document.getElementById('stateSearch').value = '';
-
-  //   //if there are items in store account for them else set the new mod number equal to the first
-  //   let new_module_number;
-  //   if(localStorage.getItem('cities')) {
-  //     new_module_number = Object.entries(JSON.parse(localStorage.getItem('cities'))).length + 1;
-  //   } else {
-  //     new_module_number = 1;
-  //   }
-
-  //   //create new city and store locally with values
-  //   createNewCityAddAndStore(city, state, new_module_number);
-  //   app.sb.setAttribute('class','sb');
-  //   app.cnt.setAttribute('class','cnt');
-  // });
 
   window.onload = function() {
       let new_obj = JSON.parse(localStorage.getItem('cities')) || {};
