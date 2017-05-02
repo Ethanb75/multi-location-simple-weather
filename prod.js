@@ -118,10 +118,10 @@ const getForecast = function thar(city, state, $target_module) {
   $show_sb.addEventListener('touchstart', function() {
     if(app.sb.classList.length > 1) {
       app.sb.setAttribute('class','sb');
-      cnt.setAttribute('class','cnt');
+      app.cnt.setAttribute('class','cnt');
     } else {
       app.sb.setAttribute('class','sb sb-active');
-      cnt.setAttribute('class','cnt cnt-active');
+      app.cnt.setAttribute('class','cnt cnt-active');
     }
   });
   $del_store.addEventListener('click', removeModules);
