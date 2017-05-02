@@ -88,15 +88,15 @@ const getForecast = function thar(city, state, $target_module) {
   //   }
   // }, true);
 
-  $close_sb.addEventListener('click', function() {
-    if(app.sb.classList.length > 1) {
-      app.sb.setAttribute('class','sb');
-      app.cnt.setAttribute('class','cnt');
-    } else {
-      app.sb.setAttribute('class','sb sb-active');
-      app.cnt.setAttribute('class','cnt cnt-active');
-    }
-  });
+  // $close_sb.addEventListener('click', function() {
+  //   if(app.sb.classList.length > 1) {
+  //     app.sb.setAttribute('class','sb');
+  //     app.cnt.setAttribute('class','cnt');
+  //   } else {
+  //     app.sb.setAttribute('class','sb sb-active');
+  //     app.cnt.setAttribute('class','cnt cnt-active');
+  //   }
+  // });
   // $close_sb.addEventListener('touchstart', function() {
   //   if(app.sb.classList.length > 1) {
   //     app.sb.setAttribute('class','sb');
@@ -106,28 +106,47 @@ const getForecast = function thar(city, state, $target_module) {
   //     app.cnt.setAttribute('class','cnt cnt-active');
   //   }
   // });
-  $show_sb.addEventListener('click', function() {
-    console.log('click event');
-    if(app.sb.classList.length > 1) {
-      app.sb.setAttribute('class','sb');
-      app.cnt.setAttribute('class','cnt');
-    } else {
-      app.sb.setAttribute('class','sb sb-active');
-      app.cnt.setAttribute('class','cnt cnt-active');
-    }
-  }, false);
-  $show_sb.addEventListener('touchstart', function() {
-    if(app.sb.classList.length > 1) {
-      app.sb.setAttribute('class','sb');
-      app.cnt.setAttribute('class','cnt');
-    } else {
-      app.sb.setAttribute('class','sb sb-active');
-      app.cnt.setAttribute('class','cnt cnt-active');
-    }
+  // $show_sb.addEventListener('click', function() {
+  //   console.log('click event');
+  //   if(app.sb.classList.length > 1) {
+  //     app.sb.setAttribute('class','sb');
+  //     app.cnt.setAttribute('class','cnt');
+  //   } else {
+  //     app.sb.setAttribute('class','sb sb-active');
+  //     app.cnt.setAttribute('class','cnt cnt-active');
+  //   }
+  // }, false);
+  // $show_sb.addEventListener('touchstart', function() {
+  //   if(app.sb.classList.length > 1) {
+  //     app.sb.setAttribute('class','sb');
+  //     app.cnt.setAttribute('class','cnt');
+  //   } else {
+  //     app.sb.setAttribute('class','sb sb-active');
+  //     app.cnt.setAttribute('class','cnt cnt-active');
+  //   }
+  // });
+  $('#show_sb').on('click touchstart', function() {
+      if(app.sb.classList.length > 1) {
+        app.sb.setAttribute('class','sb');
+        app.cnt.setAttribute('class','cnt');
+      } else {
+        app.sb.setAttribute('class','sb sb-active');
+        app.cnt.setAttribute('class','cnt cnt-active');
+      }
   });
-  $del_store.addEventListener('click', removeModules);
+  $('#close_sb').on('click touchstart', function() {
+      if(app.sb.classList.length > 1) {
+        app.sb.setAttribute('class','sb');
+        app.cnt.setAttribute('class','cnt');
+      } else {
+        app.sb.setAttribute('class','sb sb-active');
+        app.cnt.setAttribute('class','cnt cnt-active');
+      }
+  });
+  // $del_store.addEventListener('click', removeModules);
+  $('#del_store').on('click touchstart', removeModules);
 
-  $form.addEventListener('submit', function(e){
+  $('#form').on('submit touchstart', function(e){
     e.preventDefault();
     let city = document.getElementById('citySearch').value;
     let state = document.getElementById('stateSearch').value;
@@ -149,6 +168,28 @@ const getForecast = function thar(city, state, $target_module) {
     app.sb.setAttribute('class','sb');
     app.cnt.setAttribute('class','cnt');
   });
+  // $form.addEventListener('submit', function(e){
+  //   e.preventDefault();
+  //   let city = document.getElementById('citySearch').value;
+  //   let state = document.getElementById('stateSearch').value;
+
+  //   //set the input values equal to nothing
+  //   document.getElementById('citySearch').value = '';
+  //   document.getElementById('stateSearch').value = '';
+
+  //   //if there are items in store account for them else set the new mod number equal to the first
+  //   let new_module_number;
+  //   if(localStorage.getItem('cities')) {
+  //     new_module_number = Object.entries(JSON.parse(localStorage.getItem('cities'))).length + 1;
+  //   } else {
+  //     new_module_number = 1;
+  //   }
+
+  //   //create new city and store locally with values
+  //   createNewCityAddAndStore(city, state, new_module_number);
+  //   app.sb.setAttribute('class','sb');
+  //   app.cnt.setAttribute('class','cnt');
+  // });
 
   window.onload = function() {
       let new_obj = JSON.parse(localStorage.getItem('cities')) || {};
