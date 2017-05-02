@@ -125,7 +125,13 @@ const getForecast = function thar(city, state, $target_module) {
   //     app.cnt.setAttribute('class','cnt cnt-active');
   //   }
   // });
-  $('#show_sb').on('click touchstart', function() {
+  $('#show_sb').on('click touchstart', function(event) {
+      if(event.handled === false) return
+        event.stopPropagation();
+        event.preventDefault();
+        event.handled = true;
+      
+      
       if(app.sb.classList.length > 1) {
         app.sb.setAttribute('class','sb');
         app.cnt.setAttribute('class','cnt');
@@ -134,7 +140,12 @@ const getForecast = function thar(city, state, $target_module) {
         app.cnt.setAttribute('class','cnt cnt-active');
       }
   });
-  $('#close_sb').on('click touchstart', function() {
+  $('#close_sb').on('click touchstart', function(event) {
+      if(event.handled === false) return
+        event.stopPropagation();
+        event.preventDefault();
+        event.handled = true;
+
       if(app.sb.classList.length > 1) {
         app.sb.setAttribute('class','sb');
         app.cnt.setAttribute('class','cnt');
@@ -146,8 +157,12 @@ const getForecast = function thar(city, state, $target_module) {
   // $del_store.addEventListener('click', removeModules);
   $('#del_store').on('click touchstart', removeModules);
 
-  $('#form').on('submit touchstart', function(e){
-    e.preventDefault();
+  $('#form').on('submit touchstart', function(event){
+    if(event.handled === false) return
+        event.stopPropagation();
+        event.preventDefault();
+        event.handled = true;
+        
     let city = document.getElementById('citySearch').value;
     let state = document.getElementById('stateSearch').value;
 
