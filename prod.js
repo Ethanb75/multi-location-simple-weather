@@ -69,7 +69,6 @@ const getForecast = function thar(city, state, $target_module) {
     newModule.dataset.count = new_obj[city].count;
     newModule.hidden = false;
     console.log('appending mod: ', newModule);
-    console.log('mod_template: ', );
     document.getElementById('weather_mods').appendChild(newModule);
     //getWeatherAndStore() and store locally
     return getForecast(city, state, document.querySelector(`[data-count="${data_count}"]`));
@@ -80,6 +79,7 @@ const getForecast = function thar(city, state, $target_module) {
   };
 
   $close_sb.addEventListener('click', function() {
+    console.log('close_sb: click');
     if(app.sb.classList.length > 1) {
       app.sb.setAttribute('class','sb');
       app.cnt.setAttribute('class','cnt');
@@ -90,7 +90,7 @@ const getForecast = function thar(city, state, $target_module) {
   });
  
   $show_sb.addEventListener('click', function() {
-    console.log('click event');
+     console.log('show_sb: click');
     if(app.sb.classList.length > 1) {
       app.sb.setAttribute('class','sb');
       app.cnt.setAttribute('class','cnt');
@@ -101,6 +101,7 @@ const getForecast = function thar(city, state, $target_module) {
   });
 
   $show_sb.addEventListener('touchstart', function() {
+    console.log('show_sb: touch');
     if(app.sb.classList.length > 1) {
       app.sb.setAttribute('class','sb');
       app.cnt.setAttribute('class','cnt');
