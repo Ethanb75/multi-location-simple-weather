@@ -4,14 +4,21 @@ const $show_sb = document.getElementById('show_sb'),
       $form = document.getElementById('form');
 const app = {
 		cnt: document.getElementsByClassName('cnt')[0],
-		sb: document.getElementsByClassName('sb')[0],
-		// city_count: Object.entries(JSON.parse(localStorage.getItem('cities'))).length
+		sb: document.getElementsByClassName('sb')[0]
 };
 
 
 const injectModuleWithWeather = function(city, weather_obj, target) {
     let title = target.children[0];
     let module_arr = target.children[1].children;
+    let delete_mod = target.children[2];
+    
+    //add delete button event handler
+    delete_mod.onclick = function(e) {
+        let funct_city = city;
+        e.preventDefault();
+        deleteCityFromStore(city);
+    };
 
 		title.textContent = `Weather for: ${city}`;
 		module_arr.date.textContent = weather_obj.date;
@@ -46,8 +53,6 @@ const getForecast = function thar(city, state, $target_module) {
     request.send();
   };
 
-
-
   const createNewCityAddAndStore = function(city, state, data_count) {
     //getItems from store
     let new_obj = JSON.parse(localStorage.getItem('cities')) || {};
@@ -77,6 +82,41 @@ const getForecast = function thar(city, state, $target_module) {
       localStorage.removeItem('cities');
       document.getElementById('weather_mods').innerHTML = '';
   };
+  const deleteCityFromStore = function(city) {
+      let old_obj_arr = Object.entries(JSON.parse(localStorage.getItem('cities')));
+      let new_obj_arr = [];
+      
+      console.log('old object store arr: ', old_obj_arr);
+      old_obj_arr.forEach((el) => {
+        if(el[0] === city) {
+          //do nothing
+        } else {
+          new_obj_arr.push(el);
+        }
+      });
+      console.log('new arr: ', new_obj_arr);
+      //reset module area
+      document.getElementById('weather_mods').innerHTML = '';
+      //if value make obj and set local store, if no value return out
+      if(new_obj_arr.length > 0 ) {
+        let new_obj = {};
+        new_obj_arr.forEach((el, i) => {
+          
+          new_obj[el[0]] = {
+              state: el[1].state,
+              count: i + 1
+          };
+
+          createNewCityAddAndStore(el[0], el[1].state, i + 1);
+        });
+        // return and store locally
+        console.log('new obj: ', new_obj);
+        return localStorage.setItem('cities', JSON.stringify(new_obj));
+      } else {
+        return localStorage.removeItem('cities');
+      }
+  };
+
 
   $close_sb.addEventListener('click', function() {
     console.log('close_sb: click');
@@ -128,8 +168,7 @@ const getForecast = function thar(city, state, $target_module) {
 
   window.onload = function() {
       let new_obj = JSON.parse(localStorage.getItem('cities')) || {};
-      window.newObj = new_obj;
-      console.log('new_obj: ', Object.entries(new_obj));
+     
       if(Object.entries(new_obj).length > 0) {
          Object.entries(new_obj).forEach((el, i) => { 
             createNewCityAddAndStore(el[0], el[1].state, i + 1);
